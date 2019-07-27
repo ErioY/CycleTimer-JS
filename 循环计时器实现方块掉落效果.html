@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>循环计时器实现方块掉落效果</title>
+    <style>
+    div{
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <script src="js/ErioJS.js"></script>
+    <script>
+    var oDiv = document.getElementsByTagName("div");
+    var str = "";
+    // 创建方块
+    for(var i=0;i<20;i++){
+        str += "<div></div>";
+    }
+    document.body.innerHTML = str;
+    // 给每个方块定位，使其在一行显示
+    for(var i=0;i<20;i++){
+        oDiv[i].style.left = i*60 + "px";
+    }
+    // 鼠标点击事件函数
+    var i = 0;
+    document.onclick = function (){
+        // 循环计时器
+        var timer = setInterval(function(){
+            // 调用js库的doMove()函数
+            doMove(oDiv[i],7,500,"top");
+            i++;
+            // 当方块都落下时，停止循环计时器
+            if(i == 20){
+                clearInterval(timer);
+            }
+        },200)
+    }
+    </script>
+</body>
+</html>
+
